@@ -18,8 +18,8 @@
 
         <form method="POST">
           <div class="mb-3">
-            <label class="from-label" for="input_type">Choose Encryption Type:</label>
-            <select class="from-select neon-select" id="input_type" name="input_type" required>
+            <label class="form-label" for="input_type">Choose Encryption Type:</label>
+            <select class="form-select neon-select" id="input_type" name="input_type" required>
                 <option value="caesar" {% if input_type == 'caesar' %}selected{% endif %}>Caesar</option>
                 <option value="rsa" {% if input_type == 'rsa' %}selected{% endif %}>RSA</option>
                 <option value="hashing" {% if input_type == 'hashing' %}selected{% endif %}>Hashing</option>
@@ -27,25 +27,25 @@
           </div>
 
           <div class="mb-3">
-            <label class="from-label" for="user_input">Enter Value:</label>
-            <div>
+            <label class="form-label" for="user_input">Enter Value:</label>
+            <div class="d-flex gap-2">
               <input 
                   type="text" 
-                  class="from-control neon-input"
+                  class="form-control flex-grow-1 neon-input"
                   id="user_input" 
                   name="user_input" 
                   required
                   value="{{ user_input or '' }}"
               >
-              <input style="max-width: 80px;" class="from-control neon-input" type="number" id="key_caesar" name="key_caesar" required value="{{ key_caesar or '' }}">
+              <input style="max-width: 80px;" class="form-control neon-input" type="number" id="key_caesar" name="key_caesar" value="{{ key_caesar or '' }}">
             </div>  
           </div>
 
           <input type="hidden" name="action" id="action">
           
           <div class="d-flex justify-content-between mt-4">
-              <button class="btn btn-neon w-45" onclick="document.getElementById('action').value='encrypt'" id="encrypt">Encrypt</button>
-              <button class="btn btn-neon w-45 "onclick="document.getElementById('action').value='decrypt'" id="decrypt">Decrypt</button>
+              <button type="submit" class="btn btn-neon w-45" onclick="document.getElementById('action').value='encrypt'" id="encrypt">Encrypt</button>
+              <button type="submit" class="btn btn-neon w-45" onclick="document.getElementById('action').value='decrypt'" id="decrypt">Decrypt</button>
           </div>
         </form>
 
@@ -62,7 +62,13 @@
         document.getElementById("input_type").addEventListener("change", function () {
             const selected = this.value;
             const box = document.getElementById("key_caesar");
-            box.style.display = (this.value === "caesar") ? "inline" : "none";
+            if(selected === "caesar"){
+              box.style.display = "inline-block";
+              box.required = true;
+            }else{
+              box.style.display = "none";
+              box.required = false;
+            }
         });
 
         document.getElementById("input_type").dispatchEvent(new Event("change"));

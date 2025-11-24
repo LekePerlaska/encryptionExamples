@@ -55,13 +55,16 @@ def encryptRSA(m, e, n):
     cipher = []
     for i in ascii_values:
         cipher.append(power(i, e, n))
-
-    return cipher
+    
+    formated = ""
+    for i in cipher:
+        formated += f" {i}"
+    return formated
 
 def decryptRSA(c, d, n):
     message = ""
-    for i in c:
-        message += chr(power(i, d, n))
+    for i in c.split(" "):
+        message += chr(power(int(i), d, n))
     return message
 
 
