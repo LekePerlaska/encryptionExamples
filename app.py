@@ -29,4 +29,8 @@ def web():
             elif action == "decrypt":
                 output = ciphers.decryptRSA(user_input, d, n)
 
+        elif input_type == "hashing":
+            if action == "encrypt":
+                output = ciphers.hashing(user_input)
+
     return render_template('index.html', output=output, input_type=input_type, user_input=user_input, key_caesar=key_caesar)

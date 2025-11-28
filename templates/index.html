@@ -62,12 +62,16 @@
         document.getElementById("input_type").addEventListener("change", function () {
             const selected = this.value;
             const box = document.getElementById("key_caesar");
+            const dec = document.getElementById("decrypt");
             if(selected === "caesar"){
               box.style.display = "inline-block";
               box.required = true;
             }else{
               box.style.display = "none";
               box.required = false;
+            }
+            if(selected === "hashing"){
+              dec.disabled = true;
             }
         });
 

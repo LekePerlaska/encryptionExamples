@@ -1,3 +1,8 @@
+from hashlib import sha256
+
+def hashing(hash):
+    return sha256(hash.encode('utf-8')).hexdigest()
+
 def caesarCipherEncrypt(plainText, key):
     cipher = ""
     for c in plainText:
@@ -72,6 +77,8 @@ def main():
     CE = caesarCipherEncrypt("Hello!", 3)
     CD = caesarCipherDecrypt("Khoor!", 3)
 
+    print(hashing("Howdi!"))
+
     print(f"Caesar Cipher Encrypted: {CE}")
     print(f"Caesar Cipher Decrypted: {CD}")
 
@@ -88,6 +95,7 @@ def main():
 
     decrypted = decryptRSA(C, d, n)
     print(f"Decrypted Message: {decrypted}")
+
 
 if __name__ == "__main__":
     main()
